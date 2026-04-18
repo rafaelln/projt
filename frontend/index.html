@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Matriz interativa de bolinhas de 100x100">
+    <title>Matriz de Bolinhas Interativa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-wrapper">
+        <header class="header">
+            <h1>Matriz Interativa</h1>
+            <p>40x100 bolinhas. Passe o mouse para interagir ou clique e segure o <strong>botão esquerdo</strong> para desenhar!</p>
+            <div class="controls">
+                <button id="start-btn" class="btn primary-btn">Iniciar</button>
+                <input type="text" id="username" class="user-input" placeholder="Digite seu nome..." autocomplete="off">
+                <button id="finish-btn" class="btn primary-btn">Finalizar</button>
+                <button id="clear-btn" class="btn secondary-btn">Limpar Desenho</button>
+            </div>
+            <div id="message-area" class="message-area"></div>
+        </header>
+        <div class="container">
+            <div id="matrix" class="matrix"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
