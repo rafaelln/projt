@@ -1,0 +1,188 @@
+:root {
+    --bg-color: #0f172a; /* Slate 900 */
+    --text-color: #f8fafc; /* Slate 50 */
+    --accent-color: #facc15; /* Yellow 400 */
+    
+    --ball-color: #facc15; 
+    --ball-hover: #020617; /* Very dark/black */
+    --ball-size: 6px;
+    --gap-size: 1px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    /* Evita que o navegador tente selecionar os elementos ou o texto como se fossem palavras */
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.app-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    gap: 30px;
+}
+
+.header {
+    text-align: center;
+}
+
+.header h1 {
+    margin: 0 0 10px 0;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    text-shadow: 0 0 15px rgba(250, 204, 21, 0.4);
+}
+
+.header p {
+    margin: 0;
+    font-size: 1rem;
+    color: #94a3b8; /* Slate 400 */
+}
+
+.controls {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.message-area {
+    margin-top: 15px;
+    min-height: 24px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(-5px);
+    pointer-events: none;
+}
+
+.message-area.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hidden {
+    display: none !important;
+}
+
+.message-success {
+    color: #4ade80; /* Green 400 */
+}
+
+.message-error {
+    color: #f87171; /* Red 400 */
+}
+
+.user-input {
+    padding: 10px 16px;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    color: var(--text-color);
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s, background-color 0.2s;
+    /* Permite que o texto do input seja selecionável, sobrescrevendo a regra do body */
+    user-select: text;
+    -webkit-user-select: text;
+}
+
+.user-input:focus {
+    border-color: var(--accent-color);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn {
+    padding: 10px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+    font-family: 'Inter', sans-serif;
+}
+
+.primary-btn {
+    color: var(--bg-color);
+    background-color: var(--accent-color);
+    box-shadow: 0 4px 14px rgba(250, 204, 21, 0.3);
+}
+
+.primary-btn:hover {
+    transform: translateY(-2px);
+    background-color: #fde047; /* Yellow 300 */
+    box-shadow: 0 6px 20px rgba(250, 204, 21, 0.4);
+}
+
+.primary-btn:active {
+    transform: translateY(0);
+}
+
+.secondary-btn {
+    color: var(--text-color);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.secondary-btn:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.secondary-btn:active {
+    transform: translateY(0);
+}
+
+.container {
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 20px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.matrix {
+    display: grid;
+    grid-template-columns: repeat(100, var(--ball-size));
+    grid-template-rows: repeat(40, var(--ball-size));
+    gap: var(--gap-size);
+}
+
+.ball {
+    width: var(--ball-size);
+    height: var(--ball-size);
+    background-color: var(--ball-color);
+    border-radius: 50%;
+    /* Removido o box-shadow e simplificada a transição para otimizar a performance 
+       já que o navegador tem dificuldade em repintar 10.000 sombras simultaneamente. */
+    transition: background-color 0.15s ease-out, transform 0.15s ease-out;
+    cursor: crosshair;
+}
+
+.ball:hover, .ball.drawn {
+    background-color: var(--ball-hover);
+    transform: scale(0.6);
+    /* Retirado o transition: none para manter a suavidade, mas muito rápido. */
+    transition: background-color 0s, transform 0.05s ease-out;
+}

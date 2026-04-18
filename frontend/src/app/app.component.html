@@ -1,0 +1,18 @@
+<div class="app-wrapper">
+    <header class="header">
+        <h1>Matriz Interativa</h1>
+        <p>40x100 bolinhas. Passe o mouse para interagir ou clique e segure o <strong>botão esquerdo</strong> para desenhar!</p>
+        <div class="controls">
+            <button *ngIf="!currentSessionId" (click)="iniciarSessao()" class="btn primary-btn">Iniciar</button>
+            <input *ngIf="currentSessionId" type="text" [(ngModel)]="username" class="user-input" placeholder="Digite seu nome..." autocomplete="off">
+            <button *ngIf="currentSessionId" (click)="finalizarSessao()" class="btn primary-btn">Finalizar</button>
+            <button *ngIf="currentSessionId" (click)="limparDesenho()" class="btn secondary-btn">Limpar Desenho</button>
+        </div>
+        <div [class]="'message-area ' + messageAreaClass" [class.show]="showMessageArea">
+            {{ messageText }}
+        </div>
+    </header>
+    <div class="container">
+        <div #matrix class="matrix"></div>
+    </div>
+</div>
